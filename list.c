@@ -12,6 +12,7 @@ lstptr getnode()
 {
 lstptr ptr;
 ptr=(lstptr) malloc(sizeof(struct node));
+return ptr;
 }
 
 
@@ -37,9 +38,8 @@ new=getnode();
 new->data=ele;
 new->link=NULL;
 if(first==NULL)
-{
+
 first=new;
-}
 else
 {
 temp=first;
@@ -55,7 +55,7 @@ lstptr temp;
 if(first==NULL)
 {
 printf("\nList is Empty");
-exit(0);
+return;
 }
 temp=first;
 while(temp->link!=NULL)
@@ -85,7 +85,7 @@ free(temp);
 void deleteend()
 {
 lstptr temp,prev;
-temp=first=prev;
+temp=first;
 if(first==NULL)
 {
 printf("list is emplty");
@@ -104,12 +104,57 @@ prev->link=NULL;
 free(temp);
 }
 
+
+void delete_specific(int ele)
+{
+ lstptr temp,prev;
+ temp=first;
+ if(first==NULL)
+{
+ printf("List is empty");
+ 
+}
+ else if(first->data==ele)
+  {
+   if(first->link!=NULL)
+   first=first->link;
+   else
+   first=NULL;
+  }
+  else
+  {
+   while(temp->data!=ele && temp->link!=NULL)
+   {
+    prev=temp;
+    temp=temp->link;
+   }
+  if(temp->link==NULL && temp->data!=ele)
+{
+  printf("Specified item not found: %d",ele);
+return;
+}
+  else if (temp->link!=NULL)
+  prev->link=temp->link;
+  else
+  prev->link=NULL;
+  }
+ free(temp);
+ 
+ }
+
+
+lstptr insertspc()
+{
+
+
+
+
 void main()
 {
 int op=1,ch,ele;
 while(op)
 {
-printf("\n 1.INSERT BEGIN \n 2.INSERT END\n 3.DELETE BEGIN \n 4.DELETE END\n5.Display");
+printf("\n 1.INSERT BEGIN \n 2.INSERT END\n 3.DELETE BEGIN \n 4.DELETE END\n 5.DELETE SPECIFIC\n6.DISPLAY");
 printf("\nEnter your choice:");
 scanf("%d",&ch);
 switch(ch)
@@ -128,7 +173,19 @@ case 3: deletebegin();
 	break;
 case 4: deleteend();
 	break;
-case 5: display();
+        
+
+case 5:  if(first==NULL)
+{
+ printf(" List is empty");
+ break;
+}
+	printf("Enter the element to delete:");
+	scanf("%d",&ele);
+        delete_specific(ele);
+	break;
+
+case 6: display();
 	break;
 }
 printf("\nDo you want to continue?(0/1)");
