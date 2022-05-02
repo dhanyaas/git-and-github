@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 typedef struct node* lstptr;
 struct node
 {
@@ -112,7 +113,7 @@ void delete_specific(int ele)
  if(first==NULL)
 {
  printf("List is empty");
- return;
+ 
 }
  else if(first->data==ele)
   {
@@ -142,46 +143,30 @@ return;
  
  }
 
-void insertspecified(int ele,int pos){
-	listptr new=getnode();
-	listptr prev,temp;
-	temp=First;
-	int cnt=1;
-	new->data=ele;
-	new->link=NULL;
-	if(First==NULL){
-		if(pos==1){
-			First=new;
-		}else{
-			printf("Empty");
-		}
-	}else if(pos==1){
-		new->link=First;
-		First=new;
-	}else{
-		
-		while(temp->link!=NULL){
-			prev=temp;
-			temp=temp->link;
-			cnt++;
-			if(cnt==pos){
-				prev->link=new;
-				new->link=temp;
-				return;
-			}
-		}
-		if(cnt+1 == pos){
-		printf("Some");
-			temp->link=new;
-			temp=new;
-		}
-		else
-			printf("Not Possible");
-	}
+void insertspc(int ele)
+{
+int loc;
 
-
-
-
+if (first==NULL)
+{
+printf("List is empty");
+}
+else
+{
+printf("enter the location:");
+scanf("%d",&loc);
+if(loc==1)
+{
+printf("Enter the elements to insert:");
+scanf("%d",&ele);
+insertbegin(ele);
+}
+else 
+{
+printf("Enter the elements to insert:");
+scanf("%d",&ele);
+insertend(ele);
+}}}
 
 
 void main()
@@ -189,7 +174,7 @@ void main()
 int op=1,ch,ele;
 while(op)
 {
-printf("\n 1.INSERT BEGIN \n 2.INSERT END\n 3.DELETE BEGIN \n 4.DELETE END\n 5.DELETE SPECIFIC\n6.DISPLAY");
+printf("\n 1.INSERT BEGIN \n 2.INSERT END\n 3.DELETE BEGIN \n 4.DELETE END\n 5.DELETE SPECIFIC\n6.INSERT SPC\n7.DISPLAY");
 printf("\nEnter your choice:");
 scanf("%d",&ch);
 switch(ch)
@@ -212,15 +197,16 @@ case 4: deleteend();
 
 case 5:  if(first==NULL)
 {
- printf("List is empty");
+ printf(" List is empty");
  break;
 }
 	printf("Enter the element to delete:");
 	scanf("%d",&ele);
         delete_specific(ele);
 	break;
-
-case 6: display();
+case 6: insertspc(ele);
+        break;
+case 7: display();
 	break;
 }
 printf("\nDo you want to continue?(0/1)");
