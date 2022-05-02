@@ -112,7 +112,7 @@ void delete_specific(int ele)
  if(first==NULL)
 {
  printf("List is empty");
- 
+ return;
 }
  else if(first->data==ele)
   {
@@ -142,9 +142,44 @@ return;
  
  }
 
+void insertspecified(int ele,int pos){
+	listptr new=getnode();
+	listptr prev,temp;
+	temp=First;
+	int cnt=1;
+	new->data=ele;
+	new->link=NULL;
+	if(First==NULL){
+		if(pos==1){
+			First=new;
+		}else{
+			printf("Empty");
+		}
+	}else if(pos==1){
+		new->link=First;
+		First=new;
+	}else{
+		
+		while(temp->link!=NULL){
+			prev=temp;
+			temp=temp->link;
+			cnt++;
+			if(cnt==pos){
+				prev->link=new;
+				new->link=temp;
+				return;
+			}
+		}
+		if(cnt+1 == pos){
+		printf("Some");
+			temp->link=new;
+			temp=new;
+		}
+		else
+			printf("Not Possible");
+	}
 
-lstptr insertspc()
-{
+
 
 
 
@@ -177,7 +212,7 @@ case 4: deleteend();
 
 case 5:  if(first==NULL)
 {
- printf(" List is empty");
+ printf("List is empty");
  break;
 }
 	printf("Enter the element to delete:");
